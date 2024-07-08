@@ -13,7 +13,13 @@ public class PlaceService :  IPlaceService
     {
         this.placeRepository = placeRepository;
     }    
-    public async Task<IEnumerable<IPlace>> GetAllAsync(){
+    public async Task<IEnumerable<IPlace>> GetAllPlacesAsync(){
         return await this.placeRepository.GetAllAsync();
+    }
+
+    public async Task<IEnumerable<IPlace>> GetPlacesByIdAsync(int? id){
+        ArgumentNullException.ThrowIfNull(id);
+        
+        return await this.placeRepository.GetByIdAsync(id.Value);
     }
 }
