@@ -1,0 +1,27 @@
+@model IEnumerable<UcareApp.Core.Place.Base.IPlace>
+
+@{
+    ViewData["Title"] = "Places";
+}
+
+<div class="d-flex flex-wrap" style="max-width: 1400px;">
+    @foreach (var place in Model)
+    {
+        <div class="card mb-4 mr-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@place.Name</h5>
+                <p class="card-text">Adress: <input type="text" value="@place.Adress" readonly></p>
+                <a href="https://www.google.com/maps?ll=@place.Latitude,@place.Longitude">Open map</a>
+                <p class="card-text">Maintenances:</p>
+                @foreach (var maintenance in place.Maintenances)
+                {
+                    <span>@maintenance.Name</span>
+                    if (maintenance.Id != place.Maintenances.Last().Id)
+                    {
+                        <span>, </span>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
