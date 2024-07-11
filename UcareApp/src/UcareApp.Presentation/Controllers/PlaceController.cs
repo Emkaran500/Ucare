@@ -19,7 +19,7 @@ public class PlaceController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-        var places = await this.placeService.GetAllAsync();
+        var places = await this.placeService.GetAllPlacesAsync();
         return View(places);
     }
 }
