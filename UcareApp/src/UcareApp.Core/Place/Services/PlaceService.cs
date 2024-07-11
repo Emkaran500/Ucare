@@ -2,6 +2,7 @@ namespace UcareApp.Core.Place.Services;
 
 using UcareApp.Core.Place.Repositories;
 using UcareApp.Core.Place.Base;
+using UcareApp.Core.Place.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -13,31 +14,31 @@ public class PlaceService :  IPlaceService
     {
         this.placeRepository = placeRepository;
     }    
-    public async Task<IEnumerable<IPlace>> GetAllPlacesAsync(){
+    public async Task<IEnumerable<Place>> GetAllPlacesAsync(){
         return await this.placeRepository.GetAllAsync();
     }
 
-    public async Task<IEnumerable<IPlace>> GetPlacesByIdAsync(int? id){
+    public async Task<Place> GetPlaceByIdAsync(Guid? id){
         ArgumentNullException.ThrowIfNull(id);
         
         return await this.placeRepository.GetByIdAsync(id.Value);
     }
 
-    public async Task CreateNewPlaceAsync(IPlace? newPlace)
+    public async Task CreateNewPlaceAsync(Place? newPlace)
     {
         ArgumentNullException.ThrowIfNull(newPlace);
 
         await this.placeRepository.CreateAsync(newPlace);
     }
 
-    public async Task DeletePlaceAsync(int? id)
+    public async Task DeletePlaceAsync(Guid id)
     {
         ArgumentNullException.ThrowIfNull(id);
 
         await this.placeRepository.DeleteAsync(id);
     }
 
-    public async Task UpdatePlaceAsync(IPlace? place)
+    public async Task UpdatePlaceAsync(Place? place)
     {
         ArgumentNullException.ThrowIfNull(place);
 

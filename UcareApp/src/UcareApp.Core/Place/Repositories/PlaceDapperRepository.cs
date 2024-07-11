@@ -9,19 +9,19 @@ using Npgsql;
 public class PlaceDapperRepository : IPlaceRepository
 {
     private readonly string connectionString = "Server={}.postgres.database.azure.com;Database={};Port=5432;User Id={};Password={};Ssl Mode=Require;";
-    public async Task<IEnumerable<IPlace>> GetAllAsync(){
+    public async Task<IEnumerable<Place>> GetAllAsync(){
         using var connection = new NpgsqlConnection(this.connectionString);
 
-        return await connection.QueryAsync<IPlace>("Select * from Places");
+        return await connection.QueryAsync<Place>("Select * from Places");
     }
 
-    public async Task<IEnumerable<IPlace>> GetByIdAsync(int id){
+    public async Task<Place> GetByIdAsync(Guid? id){
         using var connection = new NpgsqlConnection(this.connectionString);
 
-        return await connection.QueryAsync<IPlace>($"Select * from Places Where Places.Id = {id}");
+        return await connection.QueryFirstAsync<Place>($"Select * from Places Where Places.Id = {id}");
     }
 
-    public async Task CreateAsync(IPlace? newPlace)
+    public async Task CreateAsync(Place? newPlace)
     {
         using var connection = new NpgsqlConnection(this.connectionString);
 
@@ -43,7 +43,7 @@ public class PlaceDapperRepository : IPlaceRepository
     {
         using var connection = new NpgsqlConnection(this.connectionString);
 
-        var placesIds = await connection.QueryAsync<int>("Select Id From Places");
+        var placesIds = await connection.QueryAsync<Guid?>("Select Id From Places");
 
         var containsId = placesIds.Contains(id.Value);
 
@@ -53,17 +53,17 @@ public class PlaceDapperRepository : IPlaceRepository
         }
     }
 
-    public async Task<long> UpdateAsync(IPlace? place)
+    public async Task<long> UpdateAsync(Place? place)
     {
         using var connection = new NpgsqlConnection(this.connectionString);
 
         return await connection.ExecuteAsync($@"Update Places
                                                 Set {nameof(place.Name)} = {place.Name},
-                                                    {nameof(newPlace.Adress)} = {newPlace.Adress},
-                                                    {nameof(newPlace.Longitude)} = {newPlace.Longitude},
-                                                    {nameof(newPlace.Latitude)} = {newPlace.Latitude},
-                                                    {nameof(newPlace.WorkingDays)} = ARRAY{newPlace.WorkingDays},
-                                                    {nameof(newPlace.Maintenances)} = ARRAY{newPlace.Maintenances}
+                                                    {nameof(place.Adress)} = {place.Adress},
+                                                    {nameof(place.Longitude)} = {place.Longitude},
+                                                    {nameof(place.Latitude)} = {place.Latitude},
+                                                    {nameof(place.WorkingDays)} = ARRAY{place.WorkingDays},
+                                                    {nameof(place.Maintenances)} = ARRAY{place.Maintenances}
                                                 Where Places.Id = {place.Id}");
     }
 }
