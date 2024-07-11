@@ -30,7 +30,7 @@ public class PlaceController : Controller
     {
         var place = await placeService.GetPlaceByIdAsync(id);
 
-        return base.View("Index", place);
+        return base.View("OnePlace", place);
     }
 
     [HttpGet("[action]", Name = "CreatePlace")]
@@ -44,7 +44,7 @@ public class PlaceController : Controller
     {
         await placeService.CreateNewPlaceAsync(newPlace);
 
-        return base.View("Index");
+        return base.RedirectToAction("Index");
     }
 
     [HttpGet("[action]/{id}", Name = "UpdatePlace")]
