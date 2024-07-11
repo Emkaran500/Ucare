@@ -5,7 +5,7 @@
 }
 
 <div>
-    <a asp-controller="Place" asp-action="Create" class="nav-link text-dark border border-info rounded shadow px-2" style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
+    <a asp-route="CreatePlace" class="nav-link text-dark border border-info rounded shadow px-2" style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
 </div>
 
 <div class="d-flex flex-wrap" style="max-width: 1400px;">
@@ -13,18 +13,9 @@
     {
         <div class="card mb-4 mr-4" style="width: 18rem;">
             <div class="card-body">
-                <a href="/Place/Get/@place.Id" class="card-title">@place.Name</a>
+                <a asp-route="Get" asp-route-id=@place.Id class="card-title">@place.Name</a>
                 <p class="card-text">Adress: <input type="text" value="@place.Adress" readonly></p>
                 <a href="https://www.google.com/maps?ll=@place.Latitude,@place.Longitude">Open map</a>
-                <p class="card-text">Maintenances:</p>
-                @foreach (var maintenance in place.Maintenances)
-                {
-                    <span>@maintenance.Name</span>
-                    if (maintenance.Id != place.Maintenances.Last().Id)
-                    {
-                        <span>, </span>
-                    }
-                }
             </div>
         </div>
     }

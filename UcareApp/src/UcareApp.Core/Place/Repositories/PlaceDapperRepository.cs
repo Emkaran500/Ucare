@@ -8,35 +8,24 @@ using Npgsql;
 
 public class PlaceDapperRepository : IPlaceRepository
 {
-    private readonly string connectionString = "Server={}.postgres.database.azure.com;Database={};Port=5432;User Id={};Password={};Ssl Mode=Require;";
+    private readonly string connectionString = "Server=ucarepostgresqlsrv.postgres.database.azure.com;Database=postgres;Port=5432;User Id=ucare_admin;Password=Step_password;Ssl Mode=Require;";
     public async Task<IEnumerable<Place>> GetAllAsync(){
         using var connection = new NpgsqlConnection(this.connectionString);
-
+        
         return await connection.QueryAsync<Place>("Select * from Places");
     }
 
     public async Task<Place> GetByIdAsync(Guid? id){
         using var connection = new NpgsqlConnection(this.connectionString);
 
-        return await connection.QueryFirstAsync<Place>($"Select * from Places Where Places.Id = {id}");
+        return await connection.QueryFirstAsync<Place>($"Select * from Places Where Places.Id = '{id}'");
     }
 
     public async Task CreateAsync(Place? newPlace)
     {
         using var connection = new NpgsqlConnection(this.connectionString);
 
-        await connection.ExecuteAsync($@"Insert into Places({nameof(newPlace.Name)},
-                                                            {nameof(newPlace.Adress)},
-                                                            {nameof(newPlace.Longitude)},
-                                                            {nameof(newPlace.Latitude)},
-                                                            {nameof(newPlace.WorkingDays)},
-                                                            {nameof(newPlace.Maintenances)}) 
-                                         Values ({newPlace.Name},
-                                                 {newPlace.Adress},
-                                                 {newPlace.Longitude},
-                                                 {newPlace.Latitude},
-                                                 ARRAY{newPlace.WorkingDays},
-                                                 ARRAY{newPlace.Maintenances})");
+        await connection.ExecuteAsync($@"Insert into Places(Name, Adress, Longitude, Latitude) Values ('{newPlace.Name}', '{newPlace.Adress}', {newPlace.Longitude}, {newPlace.Latitude});");
     }
 
     public async Task DeleteAsync(Guid? id)
