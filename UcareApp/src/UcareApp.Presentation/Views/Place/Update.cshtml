@@ -1,0 +1,20 @@
+@model UcareApp.Core.Place.Models.Place?
+
+@{
+    ViewData["Title"] = "Edit Place";
+}
+
+<form asp-controller="Place" asp-action="Update" method="get">
+  <div class="form-group">
+    <input type="hidden" name="Id" value=@Model.Id style="display: none;">
+    <label for="descriptionName" style="margin-bottom: 10px;">Input new name of the place here: </label>
+    <input type="text" class="form-control w-25" id="descriptionName" name="Name" placeholder="Enter name" style="margin-bottom: 10px;">
+    <label for="descriptionAdress" style="margin-bottom: 10px;">Input new address of the place here: </label>
+    <input type="text" class="form-control w-25" id="descriptionAdress" name="Adress" placeholder="Enter address" style="margin-bottom: 10px;">
+    <label for="descriptionLongitude" style="margin-bottom: 10px;">Input new longitude of the place here: </label>
+    <input type="text" class="form-control w-25" id="descriptionLongitude" name="Longitude" placeholder="Enter longitude" style="margin-bottom: 10px;">
+    <label for="descriptionLatitude" style="margin-bottom: 10px;">Input new latitude of the place here: </label>
+    <input type="text" class="form-control w-25" id="descriptionLatitude" name="Latitude" placeholder="Enter longitude" style="margin-bottom: 10px;">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

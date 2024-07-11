@@ -1,0 +1,22 @@
+@model UcareApp.Core.Place.Models.Place
+
+@{
+    ViewData["Title"] = "Place";
+}
+
+<div class="card mb-4 mr-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">Adress: <input type="text" value="@Model.Adress" readonly></p>
+                <a href="https://www.google.com/maps?ll=@Model.Latitude,@Model.Longitude">Open map</a>
+                <p class="card-text">Maintenances:</p>
+                @foreach (var maintenance in Model.Maintenances)
+                {
+                    <span>@maintenance.Name</span>
+                    if (maintenance.Id != Model.Maintenances.Last().Id)
+                    {
+                        <span>, </span>
+                    }
+                }
+            </div>
+        </div>

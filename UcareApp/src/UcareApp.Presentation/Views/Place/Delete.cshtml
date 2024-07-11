@@ -1,0 +1,15 @@
+@model UcareApp.Core.Place.Models.Place?
+
+@{
+    ViewData["Title"] = "Delete Place";
+}
+
+<div>
+    <div>
+        <span>Do you want to delete this place?</span>
+    </div>
+    <div>
+        <a asp-controller="Place" asp-action="Delete" asp-route-id=@Model.Id class="link-underline-success" style="font-size: 20px; font-weight: bold; text-decoration: none">Yes</a>
+        <a asp-controller="Place" asp-action="Get" asp-route-id=@Model.Id class="link-underline-danger" style="font-size: 20px; font-weight: bold; text-decoration: none">No</a>
+    </div>
+</div>
