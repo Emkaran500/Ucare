@@ -1,7 +1,15 @@
+using UcareApp.Core.Place.Base;
+using UcareApp.Core.Place.Services;
+using UcareApp.Core.Place.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddTransient<IPlaceRepository, PlaceDapperRepository>();
+builder.Services.AddTransient<IPlaceService, PlaceService>();
 
 var app = builder.Build();
 
