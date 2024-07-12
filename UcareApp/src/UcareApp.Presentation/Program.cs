@@ -1,7 +1,8 @@
-using UcareApp.Core.Place.Base;
-
 using UcareApp.Core.Place.Repositories;
 using UcareApp.Core.Place.Services;
+
+using UcareApp.Infrastructure.Place.Repositories;
+using UcareApp.Infrastructure.Place.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

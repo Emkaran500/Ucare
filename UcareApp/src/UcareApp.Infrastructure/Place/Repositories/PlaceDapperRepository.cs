@@ -1,6 +1,6 @@
-namespace UcareApp.Core.Place.Repositories;
+namespace UcareApp.Infrastructure.Place.Repositories;
 
-using UcareApp.Core.Place.Base;
+using UcareApp.Core.Place.Repositories;
 using UcareApp.Core.Place.Models;
 using System.Data.SqlClient;
 using Dapper;

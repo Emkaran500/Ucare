@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using UcareApp.Core.Place.Services;
-using UcareApp.Core.Place.Base;
+using UcareApp.Infrastructure.Place.Services;
+using UcareApp.Core.Place.Repositories;
+using UcareApp.Infrastructure.Place.Repositories;
 using UcareApp.Core.Place.Models;
 
 namespace UcareApp.Presentation.Controllers;

@@ -1,4 +1,4 @@
-namespace UcareApp.Core.Place.Base;
+namespace UcareApp.Core.Place.Services;
 
 using UcareApp.Core.Place.Models;
 

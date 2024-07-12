@@ -1,6 +1,6 @@
 namespace UcareApp.Core.Place.Models;
 
-using UcareApp.Core.Place.Base;
+using UcareApp.Core.Place.Models.Base;
 using UcareApp.Core.Place.Enums;
 using UcareApp.Core.Maintenance.Models;
 public class Place : IPlace {

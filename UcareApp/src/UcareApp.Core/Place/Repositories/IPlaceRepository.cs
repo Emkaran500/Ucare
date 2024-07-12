@@ -1,4 +1,4 @@
-namespace UcareApp.Core.Place.Base;
+namespace UcareApp.Core.Place.Repositories;
 
 using UcareApp.Core.Place.Models;
 public interface IPlaceRepository
