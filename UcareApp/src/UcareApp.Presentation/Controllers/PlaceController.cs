@@ -55,11 +55,11 @@ public class PlaceController : Controller
         return base.View(place);
     }
 
-    [HttpGet("api/[controller]/[action]")]
+    [HttpGet("api/[controller]/[action]", Name = "UpdatePlaceApi")]
     public async Task<IActionResult> Update(Place? place)
     {
         await this.placeService.UpdatePlaceAsync(place);
 
-        return base.RedirectToAction("Get", new {place?.Id});
+        return base.RedirectToAction("index");
     }
 }
