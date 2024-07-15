@@ -9,13 +9,15 @@ using Npgsql;
 public class PlaceDapperRepository : IPlaceRepository
 {
     private readonly string connectionString = "Server=ucarepostgresqlsrv.postgres.database.azure.com;Database=postgres;Port=5432;User Id=ucare_admin;Password=Step_password;Ssl Mode=Require;";
-    public async Task<IEnumerable<Place>> GetAllAsync(){
+    public async Task<IEnumerable<Place>> GetAllAsync()
+    {
         using var connection = new NpgsqlConnection(this.connectionString);
-        
+
         return await connection.QueryAsync<Place>("Select * from Places");
     }
 
-    public async Task<Place> GetByIdAsync(Guid? id){
+    public async Task<Place> GetByIdAsync(Guid? id)
+    {
         using var connection = new NpgsqlConnection(this.connectionString);
 
         return await connection.QueryFirstAsync<Place>($"Select * from Places Where Places.Id = '{id}'");

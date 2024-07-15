@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit Place";
 }
 
-<form asp-controller="Place" asp-action="Update" method="get">
+<form asp-route= method="get">
   <div class="form-group">
     <input type="hidden" name="Id" value=@Model.Id style="display: none;">
     <label for="descriptionName" style="margin-bottom: 10px;">Input new name of the place here: </label>
