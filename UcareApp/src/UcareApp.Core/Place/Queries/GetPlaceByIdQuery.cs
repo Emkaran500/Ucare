@@ -1,6 +1,8 @@
-namespace namespace UcareApp.Core.Place.Queries;
+using MediatR;
 
-public class GetPlaceByIdQuery
+namespace UcareApp.Core.Place.Queries;
+
+public class GetPlaceByIdQuery : IRequest<bool>
 {
     public Guid Id { get; set; }
 }

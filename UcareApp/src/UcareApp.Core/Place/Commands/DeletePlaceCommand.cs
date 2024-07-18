@@ -1,6 +1,8 @@
-namespace namespace UcareApp.Core.Place.Commands;
+using MediatR;
 
-public class DeletePlaceCommand
+namespace UcareApp.Core.Place.Commands;
+
+public class DeletePlaceCommand : IRequest<bool>
 {
     public Guid Id { get; set; }
 }

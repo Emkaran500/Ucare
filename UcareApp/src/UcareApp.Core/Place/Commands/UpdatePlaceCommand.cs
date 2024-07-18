@@ -1,6 +1,8 @@
-namespace namespace UcareApp.Core.Place.Commands;
+using MediatR;
 
-public class UpdatePlaceCommand
+namespace UcareApp.Core.Place.Commands;
+
+public class UpdatePlaceCommand : IRequest<bool>
 {
     public Guid Id { get; set; }
 }

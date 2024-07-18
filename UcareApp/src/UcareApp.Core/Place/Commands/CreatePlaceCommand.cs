@@ -1,6 +1,9 @@
-namespace namespace UcareApp.Core.Place.Commands;
+namespace UcareApp.Core.Place.Commands;
 
-public class CreatePlaceCommand
+using MediatR;
+using UcareApp.Core.Place.Models;
+
+public class CreatePlaceCommand : IRequest<bool>
 {
     public Place? Place { get; set; }
 }
