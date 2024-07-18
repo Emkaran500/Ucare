@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<IPlaceRepository, PlaceDapperRepository>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
+builder.Services.AddMediatR(configuration => {
+    configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
