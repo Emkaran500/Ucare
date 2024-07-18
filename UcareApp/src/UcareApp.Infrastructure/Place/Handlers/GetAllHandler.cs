@@ -15,8 +15,10 @@ public class GetAllPlacesHandler : IRequestHandler<GetAllPlacesQuery, bool>
         this.placeService = placeService;
     }
 
-    public Task<bool> Handle(GetAllPlacesQuery request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(GetAllPlacesQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await placeService.GetAllPlacesAsync();
+        
+        return true;
     }
 }

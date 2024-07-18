@@ -15,8 +15,15 @@ public class DeleteHandler : IRequestHandler<DeletePlaceCommand, bool>
         this.placeService = placeService;
     }
 
-    public Task<bool> Handle(DeletePlaceCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeletePlaceCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        if (request.Id == Guid.Empty)
+        {
+            throw new ArgumentNullException("Id is empty!");
+        }
+
+        await placeService.DeletePlaceAsync(request.Id);
+
+        return true;
     }
 }

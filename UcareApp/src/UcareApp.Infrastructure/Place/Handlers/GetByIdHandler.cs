@@ -15,8 +15,15 @@ public class GetPlaceByIdHandler : IRequestHandler<GetPlaceByIdQuery, bool>
         this.placeService = placeService;
     }
 
-    public Task<bool> Handle(GetPlaceByIdQuery request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(GetPlaceByIdQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        if (request.Id == Guid.Empty)
+        {
+            throw new ArgumentNullException("Id is empty!");
+        }
+
+        await placeService.GetPlaceByIdAsync(request.Id);
+
+        return true;
     }
 }
