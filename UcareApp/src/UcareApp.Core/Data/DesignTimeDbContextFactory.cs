@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
+
 using UcareApp.Core.Data;
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MyIdentityDbContext>
