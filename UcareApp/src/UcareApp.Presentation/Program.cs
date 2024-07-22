@@ -5,13 +5,20 @@ using UcareApp.Core.Data;
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Repositories;
 using UcareApp.Core.Place.Services;
-using UcareApp.Core.Auth.Models; // Make sure to include the namespace for ApplicationUser
+using UcareApp.Infrastructure.Assembly;
+using System.Reflection;
+using UcareApp.Core.Auth.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IPlaceRepository, PlaceDapperRepository>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
+builder.Services.AddMediatR(configuration => {
+    configuration.RegisterServicesFromAssembly(
+        typeof(InfrastructureAssembly).Assembly
+    );
+});
 
 builder.Services.AddControllersWithViews();
 
