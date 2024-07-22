@@ -5,8 +5,9 @@ using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using UcareApp.Core.Place.Queries;
+using UcareApp.Core.Place.Models;
 
-public class GetPlaceByIdHandler : IRequestHandler<GetPlaceByIdQuery, bool>
+public class GetPlaceByIdHandler : IRequestHandler<GetPlaceByIdQuery, Place>
 {
     private readonly IPlaceService placeService;
 
@@ -15,15 +16,13 @@ public class GetPlaceByIdHandler : IRequestHandler<GetPlaceByIdQuery, bool>
         this.placeService = placeService;
     }
 
-    public async Task<bool> Handle(GetPlaceByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Place> Handle(GetPlaceByIdQuery request, CancellationToken cancellationToken)
     {
         if (request.Id == Guid.Empty)
         {
             throw new ArgumentNullException("Id is empty!");
         }
 
-        await placeService.GetPlaceByIdAsync(request.Id);
-
-        return true;
+        return await placeService.GetPlaceByIdAsync(request.Id);
     }
 }
