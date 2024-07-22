@@ -4,23 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 using UcareApp.Core.Place.Services;
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Models;
+using MediatR;
+using UcareApp.Core.Place.Queries;
+using UcareApp.Core.Place.Commands;
 
 namespace UcareApp.Presentation.Controllers;
 
 public class PlaceController : Controller
 {
 
-    private readonly IPlaceService placeService;
-    public PlaceController(IPlaceService placeService)
+    private readonly IMediator mediator;
+    public PlaceController(IMediator mediator)
     {
-        this.placeService = placeService;
+        this.mediator = mediator;
     }
 
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-        var places = await this.placeService.GetAllPlacesAsync();
+        var getAllPlacesQuery = new GetAllPlacesQuery();
+        var places = await this.mediator.Send(getAllPlacesQuery);
+
         return View(places);
     }
 
@@ -28,7 +33,8 @@ public class PlaceController : Controller
     [HttpGet("[controller]/[action]/{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var place = await placeService.GetPlaceByIdAsync(id);
+        var getPlaceByIdQuery = new GetPlaceByIdQuery(id);
+        var place = await this.mediator.Send(getPlaceByIdQuery);
 
         return base.View("OnePlace", place);
     }
@@ -42,15 +48,24 @@ public class PlaceController : Controller
     [HttpPost("[controller]/[action]")]
     public async Task<IActionResult> Create(Place newPlace)
     {
-        await placeService.CreateNewPlaceAsync(newPlace);
+        var createPlaceCommand = new CreatePlaceCommand(newPlace);
+        var isCreated = await this.mediator.Send(createPlaceCommand);
 
-        return base.RedirectToAction("Index");
+        if (isCreated)
+        {
+            return base.RedirectToAction("Index");
+        }
+        else
+        {
+            return base.BadRequest();
+        }
     }
 
     [HttpGet("[action]/{id}", Name = "UpdatePlace")]
     public async Task<IActionResult> Update(Guid id)
     {
-        var place = await this.placeService.GetPlaceByIdAsync(id);
+        var getPlaceByIdQuery = new GetPlaceByIdQuery(id);
+        var place = await this.mediator.Send(getPlaceByIdQuery);
 
         return base.View(place);
     }
@@ -58,8 +73,16 @@ public class PlaceController : Controller
     [HttpGet("api/[controller]/[action]", Name = "UpdatePlaceApi")]
     public async Task<IActionResult> Update(Place? place)
     {
-        await this.placeService.UpdatePlaceAsync(place);
+        var updatePlaceCommand = new UpdatePlaceCommand(place);
+        var isUpdated = await mediator.Send(updatePlaceCommand);
 
-        return base.RedirectToAction("index");
+        if (isUpdated)
+        {
+            return base.RedirectToAction("index");
+        }
+        else
+        {
+            return base.BadRequest();
+        }
     }
 }

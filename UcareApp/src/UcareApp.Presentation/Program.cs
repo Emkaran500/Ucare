@@ -1,13 +1,17 @@
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Repositories;
 using UcareApp.Core.Place.Services;
+using UcareApp.Infrastructure.Assembly;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<IPlaceRepository, PlaceDapperRepository>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
 builder.Services.AddMediatR(configuration => {
-    configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+    configuration.RegisterServicesFromAssembly(
+        typeof(InfrastructureAssembly).Assembly
+    );
 });
 
 // Add services to the container.
