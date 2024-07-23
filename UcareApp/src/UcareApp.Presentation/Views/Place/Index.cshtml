@@ -13,7 +13,7 @@
     {
         <div class="card mb-4 mr-4" style="width: 18rem;">
             <div class="card-body">
-                <a asp-route="Get" asp-route-id=@place.Id class="card-title">@place.Name</a>
+                <a asp-controller="Place" asp-action="GetById" asp-route-id=@place.Id class="card-title">@place.Name</a>
                 <p class="card-text">Adress: <input type="text" value="@place.Adress" readonly></p>
                 <a href="https://www.google.com/maps?ll=@place.Latitude,@place.Longitude">Open map</a>
                 <a asp-route="UpdatePlace" asp-route-id='@place.Id' class="nav-link text-dark border border-info rounded shadow px-2" style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>

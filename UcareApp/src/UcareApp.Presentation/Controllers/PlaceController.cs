@@ -29,8 +29,7 @@ public class PlaceController : Controller
         return View(places);
     }
 
-    [ActionName("Get")]
-    [HttpGet("[controller]/[action]/{id}")]
+    [HttpGet("[controller]/[action]")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var getPlaceByIdQuery = new GetPlaceByIdQuery(id);
