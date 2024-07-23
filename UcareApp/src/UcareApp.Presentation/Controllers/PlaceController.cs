@@ -84,4 +84,19 @@ public class PlaceController : Controller
             return base.BadRequest();
         }
     }
+    [HttpGet("api/[controller]/[action]", Name = "DeletePlaceApi")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var deletePlaceCommand = new DeletePlaceCommand(id);
+        var isDeleted = await mediator.Send(deletePlaceCommand);
+
+        if (isDeleted)
+        {
+            return base.RedirectToAction("index");
+        }
+        else
+        {
+            return base.BadRequest();
+        }
+    }
 }
