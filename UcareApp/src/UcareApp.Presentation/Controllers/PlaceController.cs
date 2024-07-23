@@ -33,7 +33,7 @@ public class PlaceController : Controller
     [HttpGet("[controller]/[action]/{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var getPlaceByIdQuery = new GetPlaceByIdQuery(id);
+        var getPlaceByIdQuery = new GetPlaceByIdQuery(){Id = id};
         var place = await this.mediator.Send(getPlaceByIdQuery);
 
         return base.View("OnePlace", place);
@@ -48,7 +48,7 @@ public class PlaceController : Controller
     [HttpPost("[controller]/[action]")]
     public async Task<IActionResult> Create(Place newPlace)
     {
-        var createPlaceCommand = new CreatePlaceCommand(newPlace);
+        var createPlaceCommand = new CreatePlaceCommand(){Place = newPlace};
         var isCreated = await this.mediator.Send(createPlaceCommand);
 
         if (isCreated)
@@ -64,7 +64,7 @@ public class PlaceController : Controller
     [HttpGet("[action]/{id}", Name = "UpdatePlace")]
     public async Task<IActionResult> Update(Guid id)
     {
-        var getPlaceByIdQuery = new GetPlaceByIdQuery(id);
+        var getPlaceByIdQuery = new GetPlaceByIdQuery(){Id = id};
         var place = await this.mediator.Send(getPlaceByIdQuery);
 
         return base.View(place);
@@ -73,7 +73,7 @@ public class PlaceController : Controller
     [HttpGet("api/[controller]/[action]", Name = "UpdatePlaceApi")]
     public async Task<IActionResult> Update(Place? place)
     {
-        var updatePlaceCommand = new UpdatePlaceCommand(place);
+        var updatePlaceCommand = new UpdatePlaceCommand(){Place = place};
         var isUpdated = await mediator.Send(updatePlaceCommand);
 
         if (isUpdated)
