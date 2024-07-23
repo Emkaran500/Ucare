@@ -40,7 +40,7 @@ public class PlaceDapperRepository : IPlaceRepository
 
         if (containsId)
         {
-            await connection.ExecuteAsync($"Delete from Places Where Places.Id = {id}");
+            await connection.ExecuteAsync("DELETE FROM Places WHERE Places.Id = @Id", new { Id = id });
         }
     }
 
