@@ -20,12 +20,7 @@ namespace UcareApp.Presentation.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            ViewData["UserName"] = user?.Name; // Assuming Name property exists in ApplicationUser
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            ViewData["UserName"] = user?.Name ?? "guest"; 
             return View();
         }
 
