@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
-using UcareApp.Core.Place.Services;
+using UcareApp.Infrastructure.Place.Services;
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Models;
 using MediatR;

@@ -37,11 +37,11 @@ public class CreateHandler : IRequestHandler<CreatePlaceCommand, bool>
         {
             throw new ArgumentException("Longitude cannot be less than -180 or more than 180 degrees!");
         }
-        if (request.Place.WorkingDays.Count() <= 0)
+        if (/*request.Place.WorkingDays.Count() <= 0*/ false)
         {
             throw new ArgumentException("Must be at least one working day!");
         }
-        if (request.Place.Maintenances.Count() <= 0)
+        if (/*request.Place.Maintenances.Count() <= 0*/ false)
         {
             throw new ArgumentException("Must be at least one type of maintenance!");
         }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Xunit;
 using Dapper;
 using UcareApp.Core.Place.Base;
-using UcareApp.Core.Place.Repositories;
+using UcareApp.Infrastructure.Place.Repositories;
 using UcareApp.Core.Place.Enums;
 using UcareApp.Core.Place.Models;
 using UcareApp.Core.Maintenance.Models;
-using UcareApp.Core.Place.Services;
+using UcareApp.Infrastructure.Place.Services;
 
 namespace UcareApp.Tests.Core.Place.Repositories;
 

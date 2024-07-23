@@ -1,4 +1,4 @@
-namespace UcareApp.Core.Place.Repositories;
+namespace UcareApp.Infrastructure.Place.Repositories;
 
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Models;
@@ -49,12 +49,16 @@ public class PlaceDapperRepository : IPlaceRepository
         using var connection = new NpgsqlConnection(this.connectionString);
 
         return await connection.ExecuteAsync($@"Update Places
-                                                Set {nameof(place.Name)} = {place.Name},
-                                                    {nameof(place.Adress)} = {place.Adress},
-                                                    {nameof(place.Longitude)} = {place.Longitude},
-                                                    {nameof(place.Latitude)} = {place.Latitude},
-                                                    {nameof(place.WorkingDays)} = ARRAY{place.WorkingDays},
-                                                    {nameof(place.Maintenances)} = ARRAY{place.Maintenances}
-                                                Where Places.Id = {place.Id}");
+                                                Set name = @Name,
+                                                    adress = @Adress,
+                                                    longitude = @Longitude,
+                                                    latitude = @Latitude,
+                                                    workingDays = ARRAY[]::days[],
+                                                    maintenanceid = null
+                                                Where Places.id = @Id", new { Id = place.Id, 
+                                                                                Name = place.Name, 
+                                                                                Adress = place.Adress, 
+                                                                                Longitude = place.Longitude, 
+                                                                                Latitude = place.Latitude, });
     }
 }

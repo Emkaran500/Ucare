@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Place";
+    var userIsAdmin = User.IsInRole("admin");
 }
 
 <div class="card mb-4 mr-4" style="width: 18rem;">
@@ -9,7 +10,7 @@
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">Adress: <input type="text" value="@Model.Adress" readonly></p>
         <a href="https://www.google.com/maps?ll=@Model.Latitude,@Model.Longitude">Open map</a>
-        <p class="card-text">Maintenances:</p>
+        @* <p class="card-text">Maintenances:</p>
         @foreach (var maintenance in Model.Maintenances)
         {
             <span>@maintenance.Name</span>
@@ -17,6 +18,15 @@
             {
                 <span>, </span>
             }
+        } *@
+        @if (userIsAdmin)
+        {
+            <a asp-route="UpdatePlace" asp-route-id='@Model.Id'
+                class="nav-link text-dark border border-info rounded shadow px-2"
+                style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
+
+            <a asp-route="DeletePlaceApi" asp-route-id="@Model.Id.ToString()"
+                class="btn btn-danger delete-btn">Delete</a>
         }
     </div>
 </div>

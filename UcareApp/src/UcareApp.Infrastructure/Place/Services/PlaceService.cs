@@ -1,6 +1,6 @@
-namespace UcareApp.Core.Place.Services;
+namespace UcareApp.Infrastructure.Place.Services;
 
-using UcareApp.Core.Place.Repositories;
+using UcareApp.Infrastructure.Place.Repositories;
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Models;
 using System.Threading.Tasks;
