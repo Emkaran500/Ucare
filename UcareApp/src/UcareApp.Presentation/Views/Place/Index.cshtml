@@ -1,13 +1,14 @@
-@model IEnumerable<UcareApp.Core.Place.Models.Place>
-
 @{
     ViewData["Title"] = "Places";
+    var userIsAdmin = User.IsInRole("admin");
 }
-
-<div>
-    <a asp-route="CreatePlace" class="nav-link text-dark border border-info rounded shadow px-2"
-        style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
-</div>
+@if (userIsAdmin)
+{
+    <div>
+        <a asp-route="CreatePlace" class="nav-link text-dark border border-info rounded shadow px-2"
+            style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
+    </div>
+}
 
 <div class="d-flex flex-wrap" style="max-width: 1400px;">
     @foreach (var place in Model)
@@ -17,10 +18,15 @@
                 <a asp-controller="Place" asp-action="GetById" asp-route-id=@place.Id class="card-title">@place.Name</a>
                 <p class="card-text">Adress: <input type="text" value="@place.Adress" readonly></p>
                 <a href="https://www.google.com/maps?ll=@place.Latitude,@place.Longitude">Open map</a>
-                <a asp-route="UpdatePlace" asp-route-id='@place.Id'
-                    class="nav-link text-dark border border-info rounded shadow px-2"
-                    style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
-                <a asp-route="DeletePlaceApi" asp-route-id="@place.Id.ToString()" class="btn btn-danger delete-btn">Delete</a>
+                @if (userIsAdmin)
+                {
+                    <a asp-route="UpdatePlace" asp-route-id='@place.Id'
+                        class="nav-link text-dark border border-info rounded shadow px-2"
+                        style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
+
+                    <a asp-route="DeletePlaceApi" asp-route-id="@place.Id.ToString()"
+                        class="btn btn-danger delete-btn">Delete</a>
+                }
             </div>
         </div>
     }

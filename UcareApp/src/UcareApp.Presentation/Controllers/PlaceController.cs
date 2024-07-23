@@ -38,12 +38,14 @@ public class PlaceController : Controller
         return base.View("OnePlace", place);
     }
 
+    [Authorize(Roles = "admin")]
     [HttpGet("[action]", Name = "CreatePlace")]
     public IActionResult Create()
     {
         return base.View();
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost("[controller]/[action]")]
     public async Task<IActionResult> Create(Place newPlace)
     {
@@ -60,6 +62,7 @@ public class PlaceController : Controller
         }
     }
 
+    [Authorize(Roles = "admin")]
     [HttpGet("[action]/{id}", Name = "UpdatePlace")]
     public async Task<IActionResult> Update(Guid id)
     {
@@ -69,6 +72,7 @@ public class PlaceController : Controller
         return base.View(place);
     }
 
+    [Authorize(Roles = "admin")]
     [HttpGet("api/[controller]/[action]", Name = "UpdatePlaceApi")]
     public async Task<IActionResult> Update(Place? place)
     {
@@ -84,6 +88,8 @@ public class PlaceController : Controller
             return base.BadRequest();
         }
     }
+    
+    [Authorize(Roles = "admin")]
     [HttpGet("api/[controller]/[action]", Name = "DeletePlaceApi")]
     public async Task<IActionResult> Delete(Guid id)
     {
