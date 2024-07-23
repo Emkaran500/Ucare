@@ -2,16 +2,26 @@
     ViewData["Title"] = "Create";
 }
 
-<form asp-controller="Place" asp-action="Create" method="post">
-  <div class="form-group">
-    <label for="descriptionName" style="margin-bottom: 10px;">Input name of the place here: </label>
-    <input type="text" class="form-control w-25" id="descriptionName" name="Name" placeholder="Enter name" style="margin-bottom: 10px;">
-    <label for="descriptionAdress" style="margin-bottom: 10px;">Input address of the place here: </label>
-    <input type="text" class="form-control w-25" id="descriptionAdress" name="Adress" placeholder="Enter address" style="margin-bottom: 10px;">
-    <label for="descriptionLongitude" style="margin-bottom: 10px;">Input longitude of the place here: </label>
-    <input type="text" class="form-control w-25" id="descriptionLongitude" name="Longitude" placeholder="Enter longitude" style="margin-bottom: 10px;">
-    <label for="descriptionLatitude" style="margin-bottom: 10px;">Input latitude of the place here: </label>
-    <input type="text" class="form-control w-25" id="descriptionLatitude" name="Latitude" placeholder="Enter longitude" style="margin-bottom: 10px;">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+    <form asp-controller="Place" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="descriptionName" style="margin-bottom: 10px;">Input name of the place here: </label>
+            <input type="text" class="form-control w-25" id="descriptionName" name="Name" placeholder="Enter name" style="margin-bottom: 10px;">
+            <label for="descriptionAdress" style="margin-bottom: 10px;">Input address of the place here: </label>
+            <input type="text" class="form-control w-25" id="descriptionAdress" name="Adress" placeholder="Enter address" style="margin-bottom: 10px;">
+            <label for="descriptionLongitude" style="margin-bottom: 10px;">Input longitude of the place here: </label>
+            <input type="text" class="form-control w-25" id="descriptionLongitude" name="Longitude" placeholder="Enter longitude" style="margin-bottom: 10px;">
+            <label for="descriptionLatitude" style="margin-bottom: 10px;">Input latitude of the place here: </label>
+            <input type="text" class="form-control w-25" id="descriptionLatitude" name="Latitude" placeholder="Enter latitude" style="margin-bottom: 10px;">
+        </div>
+     
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+</html>
