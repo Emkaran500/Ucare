@@ -6,4 +6,9 @@ using UcareApp.Core.Place.Models;
 public class UpdatePlaceCommand : IRequest<bool>
 {
     public Place? Place { get; set; }
+
+    public UpdatePlaceCommand(Place? place)
+    {
+        this.Place = place;
+    }
 }

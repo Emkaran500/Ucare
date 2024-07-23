@@ -5,8 +5,9 @@ using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using UcareApp.Core.Place.Queries;
+using UcareApp.Core.Place.Models;
 
-public class GetAllPlacesHandler : IRequestHandler<GetAllPlacesQuery, bool>
+public class GetAllPlacesHandler : IRequestHandler<GetAllPlacesQuery, IEnumerable<Place>>
 {
     private readonly IPlaceService placeService;
 
@@ -15,10 +16,8 @@ public class GetAllPlacesHandler : IRequestHandler<GetAllPlacesQuery, bool>
         this.placeService = placeService;
     }
 
-    public async Task<bool> Handle(GetAllPlacesQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Place>> Handle(GetAllPlacesQuery request, CancellationToken cancellationToken)
     {
-        await placeService.GetAllPlacesAsync();
-        
-        return true;
+        return await this.placeService.GetAllPlacesAsync();
     }
 }
