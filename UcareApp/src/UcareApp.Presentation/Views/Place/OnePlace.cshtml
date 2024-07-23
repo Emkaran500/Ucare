@@ -5,28 +5,41 @@
     var userIsAdmin = User.IsInRole("admin");
 }
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 <div class="card mb-4 mr-4" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
-        <p class="card-text">Adress: <input type="text" value="@Model.Adress" readonly></p>
-        <a href="https://www.google.com/maps?ll=@Model.Latitude,@Model.Longitude">Open map</a>
-        @* <p class="card-text">Maintenances:</p>
-        @foreach (var maintenance in Model.Maintenances)
-        {
-            <span>@maintenance.Name</span>
-            if (maintenance.Id != Model.Maintenances.Last().Id)
-            {
-                <span>, </span>
-            }
-        } *@
+        <p class="card-text">Address: <input type="text" value="@Model.Adress" readonly></p>
+        <div id="map" style="height: 200px;"></div>
+
         @if (userIsAdmin)
         {
             <a asp-route="UpdatePlace" asp-route-id='@Model.Id'
-                class="nav-link text-dark border border-info rounded shadow px-2"
-                style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
+               class="nav-link text-dark border border-info rounded shadow px-2"
+               style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
 
             <a asp-route="DeletePlaceApi" asp-route-id="@Model.Id.ToString()"
-                class="btn btn-danger delete-btn">Delete</a>
+               class="btn btn-danger delete-btn">Delete</a>
         }
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+        var latitudeStr = '@Model.Latitude'.toString().replace(',', '.');
+        var longitudeStr = '@Model.Longitude'.toString().replace(',', '.');
+        var map = L.map('map').setView([latitudeStr, longitudeStr], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© Ucare'
+        }).addTo(map);
+
+        L.marker([@Model.Latitude, @Model.Longitude]).addTo(map)
+            .bindPopup('<b>@Model.Name</b><br>Address: @Model.Adress<br>Latitude: @Model.Latitude<br>Longitude: @Model.Longitude')
+            .openPopup();
+    });
+</script>
