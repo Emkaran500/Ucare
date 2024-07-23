@@ -10,6 +10,6 @@ public class Place : IPlace {
     public string? Adress { get; set; }
     public double Longitude { get; set; }
     public double Latitude { get; set; }
-    public IEnumerable<WeekDayEnum> WorkingDays { get; set; }
-    public IEnumerable<Maintenance> Maintenances { get; set; }
+    //public IEnumerable<WeekDayEnum> WorkingDays { get; set; }
+    //public IEnumerable<Maintenance> Maintenances { get; set; }
 }
