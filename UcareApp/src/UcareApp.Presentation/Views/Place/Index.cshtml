@@ -2,32 +2,63 @@
     ViewData["Title"] = "Places";
     var userIsAdmin = User.IsInRole("admin");
 }
+
 @if (userIsAdmin)
 {
     <div>
         <a asp-route="CreatePlace" class="nav-link text-dark border border-info rounded shadow px-2"
-            style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
+           style="width: fit-content; padding: 0px; font-size: 20px;">Add new Place</a>
     </div>
 }
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <div class="d-flex flex-wrap" style="max-width: 1400px;">
     @foreach (var place in Model)
     {
         <div class="card mb-4 mr-4" style="width: 18rem;">
             <div class="card-body">
-                <a asp-controller="Place" asp-action="GetById" asp-route-id=@place.Id class="card-title">@place.Name</a>
-                <p class="card-text">Adress: <input type="text" value="@place.Adress" readonly></p>
-                <a href="https://www.google.com/maps?ll=@place.Latitude,@place.Longitude">Open map</a>
+                <a asp-controller="Place" asp-action="GetById" asp-route-id="@place.Id" class="card-title">@place.Name</a>
+                <p class="card-text">Address: <input type="text" value="@place.Adress" readonly></p>
+                <div id="map-@place.Id" style="height: 200px;"></div>
                 @if (userIsAdmin)
                 {
                     <a asp-route="UpdatePlace" asp-route-id='@place.Id'
-                        class="nav-link text-dark border border-info rounded shadow px-2"
-                        style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
+                       class="nav-link text-dark border border-info rounded shadow px-2"
+                       style="width: fit-content; padding: 0px; font-size: 20px;">Update Place</a>
 
                     <a asp-route="DeletePlaceApi" asp-route-id="@place.Id.ToString()"
-                        class="btn btn-danger delete-btn">Delete</a>
+                       class="btn btn-danger delete-btn">Delete</a>
                 }
             </div>
         </div>
     }
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    @foreach (var place in Model)
+    {
+        <text>
+                   
+                    var latitudeStr = '@place.Latitude'.toString().replace(',', '.');
+            var longitudeStr = '@place.Longitude'.toString().replace(',', '.');
+
+            var latitude = parseFloat(latitudeStr);
+            var longitude = parseFloat(longitudeStr);
+            if (!isNaN(latitude) && !isNaN(longitude)) {
+                var map = L.map('map-@place.Id').setView([latitude, longitude], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© Ucare'
+                }).addTo(map);
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup('<b>@place.Name</b><br>Latitude: ' + latitude + '<br>Longitude: ' + longitude)
+                    .openPopup();
+            } else {
+                console.error('Invalid latitude or longitude for place with ID: @place.Id');
+            }
+        </text>
+    }
+            });
+</script>
