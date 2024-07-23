@@ -1,4 +1,4 @@
-namespace UcareApp.Core.Place.Repositories;
+namespace UcareApp.Infrastructure.Place.Repositories;
 
 using UcareApp.Core.Place.Base;
 using UcareApp.Core.Place.Models;
@@ -53,8 +53,8 @@ public class PlaceDapperRepository : IPlaceRepository
                                                     {nameof(place.Adress)} = {place.Adress},
                                                     {nameof(place.Longitude)} = {place.Longitude},
                                                     {nameof(place.Latitude)} = {place.Latitude},
-                                                    {nameof(place.WorkingDays)} = ARRAY{place.WorkingDays},
-                                                    {nameof(place.Maintenances)} = ARRAY{place.Maintenances}
+                                                    {nameof(place.WorkingDays)} = ARRAY[],
+                                                    {nameof(place.Maintenances)} = ARRAY[]
                                                 Where Places.Id = {place.Id}");
     }
 }

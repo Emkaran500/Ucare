@@ -32,6 +32,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\UcareApp.Core\UcareApp.Core.csproj" />
+    <ProjectReference Include="..\..\src\UcareApp.Infrastructure\UcareApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\UcareApp.Presentation\UcareApp.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

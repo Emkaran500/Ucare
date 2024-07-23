@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UcareApp.Core.Auth.Models;
 using UcareApp.Core.Auth.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UcareApp.Presentation.Controllers;
 
